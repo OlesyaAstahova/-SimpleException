@@ -33,7 +33,7 @@ namespace SimpleException
             //Делегировать запрос внутреннему объекту 
             theMusicBox.TurnOn(state);
         }
-        //Проверить, не перегрелся ли автомобиль
+        //Проверить, не перегрелся ли автомобиль (должно генерироваться исключение)
         public void Accelerate (int delta)
         {
             if (carIsDead)
@@ -43,11 +43,14 @@ namespace SimpleException
             else
             {
                 CurrentSpeed += delta;
-                if ( CurrentSpeed > MaxSpeed)
+                if ( CurrentSpeed >= MaxSpeed)
                 {
-                    Console.WriteLine("{0} has overheated!", PetName);
-                    CurrentSpeed = 0;
                     carIsDead = true;
+                   // Console.WriteLine("{0} has overheated!", PetName);
+                    CurrentSpeed = 0;
+                    //carIsDead = true;
+                    // Использовать ключевое слово throw для генерации исключения
+                    throw new Exception(string.Format("{0} has overheated!", PetName));
                 }
                 else
                 {
