@@ -21,6 +21,7 @@ namespace SimpleException
         //Автомобиль имеет радиоприемник
         private Radio theMusicBox = new Radio();
 
+
         //Конструкторы
         public Car() { }
         public Car (string name, int speed)
@@ -46,11 +47,21 @@ namespace SimpleException
                 if ( CurrentSpeed >= MaxSpeed)
                 {
                     carIsDead = true;
-                   // Console.WriteLine("{0} has overheated!", PetName);
                     CurrentSpeed = 0;
+                    // Console.WriteLine("{0} has overheated!", PetName);
                     //carIsDead = true;
+
+                    //Создать локальную переменную перед генерацией объекта Exception, чтобы можно было обращаться к свойству HelpLink
+                    Exception ex = new Exception(string.Format("{0}  has overheated!", PetName));
+                    ex.HelpLink = "http://www.CarsRUs.com";
+
+                    //Указать специальные данные, касающиеся ошибки
+                    ex.Data.Add("TimeStamp", string.Format("The car exploaded at {0}", DateTime.Now));
+                    ex.Data.Add("Cause", "You have a lead foot");
+                    
+                    throw ex;
                     // Использовать ключевое слово throw для генерации исключения
-                    throw new Exception(string.Format("{0} has overheated!", PetName));
+                    //throw new Exception(string.Format("{0} has overheated!", PetName));
                 }
                 else
                 {
