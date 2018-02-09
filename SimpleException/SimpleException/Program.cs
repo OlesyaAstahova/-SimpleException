@@ -46,7 +46,9 @@ namespace SimpleException
             }
            
             //Ошибка была обработана, продолжается выполнение следующего оператора
-            Console.WriteLine("\n***** Out of exception logic *****");
+            Console.WriteLine("\n***** Out of exception logic *****\n");
+            NullReferenceException nullRefEx = new NullReferenceException();
+            Console.WriteLine("NullReferenceException is-a SystemException? : {0}", nullRefEx is SystemException);
             Console.ReadLine();
         }
     }
